@@ -117,6 +117,25 @@
 						"type": "DelimitedTextReadSettings"
 					}
 				}
+			},
+			{
+				"name": "Validate Metadata",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Get file Metadata",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(activity('Get file Metadata').output.columnCount,13)",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"annotations": []
