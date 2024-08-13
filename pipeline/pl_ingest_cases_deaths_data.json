@@ -48,13 +48,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_cases_death_raw_csv_http",
+						"referenceName": "ds_ecdc_raw_csv_http",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_cases_death_raw_dl",
+						"referenceName": "ds_ecdc_raw_dl",
 						"type": "DatasetReference"
 					}
 				]
