@@ -3,64 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy cases and Deaths data",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
-					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_ecdc_raw_csv_http",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ds_ecdc_raw_dl",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
-				"name": "Lookup1",
+				"name": "LookupFileList",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -91,11 +34,11 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "forEachListItem",
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Lookup1",
+						"activity": "LookupFileList",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -103,9 +46,13 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"items": {
+						"value": "@activity('LookupFileList').output",
+						"type": "Expression"
+					},
 					"activities": [
 						{
-							"name": "Copy cases and Deaths data_copy1",
+							"name": "Copy ecdc data",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -151,13 +98,29 @@
 							"inputs": [
 								{
 									"referenceName": "ds_ecdc_raw_csv_http",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"sourceRelativeURL": {
+											"value": "@item().sourceRelativeURL",
+											"type": "Expression"
+										},
+										"sourceBaseURL": {
+											"value": "@item().sourceBaseURL",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
 								{
 									"referenceName": "ds_ecdc_raw_dl",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"sinkFileName": {
+											"value": "@item().sinkFileName",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
