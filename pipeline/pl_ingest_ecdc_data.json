@@ -47,7 +47,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('LookupFileList').output",
+						"value": "@activity('LookupFileList').output.value",
 						"type": "Expression"
 					},
 					"activities": [
@@ -68,7 +68,8 @@
 									"type": "DelimitedTextSource",
 									"storeSettings": {
 										"type": "HttpReadSettings",
-										"requestMethod": "GET"
+										"requestMethod": "GET",
+										"requestTimeout": ""
 									},
 									"formatSettings": {
 										"type": "DelimitedTextReadSettings"
