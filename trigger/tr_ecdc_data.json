@@ -1,0 +1,17 @@
+{
+	"name": "tr_ecdc_data",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2024-08-13T15:15:00",
+				"timeZone": "Romance Standard Time"
+			}
+		}
+	}
+}
