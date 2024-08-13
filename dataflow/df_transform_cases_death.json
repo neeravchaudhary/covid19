@@ -110,7 +110,6 @@
 				"     lateral: true) ~> PivotCount",
 				"SelectForSink sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     rowUrlColumn:'country_code_2_digit',",
 				"     truncate: true,",
 				"     umask: 0222,",
 				"     preCommands: [],",
