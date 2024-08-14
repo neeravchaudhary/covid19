@@ -29,7 +29,14 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_weekly_sink",
+						"referenceName": "ds_weekly_count_sink",
+						"type": "DatasetReference"
+					},
+					"name": "sinkWeeklyData"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_daily_count_sink",
 						"type": "DatasetReference"
 					},
 					"name": "sinkDailyData"
@@ -207,6 +214,14 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectRequiredData4",
 				"selectRequiredData3 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkWeeklyData",
+				"selectRequiredData4 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     truncate: true,",
 				"     umask: 0022,",

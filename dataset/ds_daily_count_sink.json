@@ -1,5 +1,5 @@
 {
-	"name": "ds_weekly_count_sink",
+	"name": "ds_daily_count_sink",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_covid24reportdl",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "HospitalAdmissionData/Weekly",
+				"folderPath": "HospitalAdmissionData/Daily",
 				"fileSystem": "processed"
 			},
 			"columnDelimiter": ",",
