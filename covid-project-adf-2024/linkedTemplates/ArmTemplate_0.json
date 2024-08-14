@@ -863,13 +863,15 @@
 						"     lateral: true) ~> PivotCount",
 						"SelectForSink sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
-						"     rowUrlColumn:'country',",
 						"     truncate: true,",
 						"     umask: 0222,",
 						"     preCommands: [],",
 						"     postCommands: [],",
 						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> CasesAndDeathSink"
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('hash', 15,",
+						"          country_code_3_digit",
+						"     )) ~> CasesAndDeathSink"
 					]
 				}
 			},
@@ -913,8 +915,12 @@
 								"coreCount": 8,
 								"computeType": "General"
 							},
-							"traceLevel": "Fine",
-							"runConcurrently": true
+							"traceLevel": "None",
+							"runConcurrently": true,
+							"continueOnError": false,
+							"cacheSinks": {
+								"firstRowOnly": true
+							}
 						}
 					}
 				],
