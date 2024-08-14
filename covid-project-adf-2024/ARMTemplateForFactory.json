@@ -978,10 +978,7 @@
 						"     preCommands: [],",
 						"     postCommands: [],",
 						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     partitionBy('hash', 15,",
-						"          country_code_3_digit",
-						"     )) ~> CasesAndDeathSink"
+						"     skipDuplicateMapOutputs: true) ~> CasesAndDeathSink"
 					]
 				}
 			},
