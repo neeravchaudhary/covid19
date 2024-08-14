@@ -56,7 +56,7 @@
 					"name": "SortWeekly"
 				},
 				{
-					"name": "sortDaily"
+					"name": "SortDaily"
 				}
 			],
 			"scriptLines": [
@@ -161,7 +161,7 @@
 				"pivotWeeklyIndicators sort(desc(reported_date, true),",
 				"     asc(country, true)) ~> SortWeekly",
 				"pivotDailyIndicators sort(desc(reported_date, true),",
-				"     asc(country, true)) ~> sortDaily"
+				"     asc(country, true)) ~> SortDaily"
 			]
 		}
 	}
