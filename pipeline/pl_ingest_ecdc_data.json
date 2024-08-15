@@ -114,7 +114,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "ds_ecdc_raw_dl",
+									"referenceName": "ds_ecdc_raw_csv_dl",
 									"type": "DatasetReference",
 									"parameters": {
 										"sinkFileName": {

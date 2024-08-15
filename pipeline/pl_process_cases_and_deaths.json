@@ -25,13 +25,15 @@
 					},
 					"traceLevel": "None",
 					"runConcurrently": true,
-					"continueOnError": false,
 					"cacheSinks": {
 						"firstRowOnly": true
 					}
 				}
 			}
 		],
+		"folder": {
+			"name": "pl_process"
+		},
 		"annotations": []
 	}
 }

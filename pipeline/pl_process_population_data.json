@@ -23,6 +23,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "pl_process"
+		},
 		"annotations": []
 	}
 }

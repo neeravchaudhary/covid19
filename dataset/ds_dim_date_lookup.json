@@ -5,6 +5,9 @@
 			"referenceName": "ls_covid24reportdl",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "lookup"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
