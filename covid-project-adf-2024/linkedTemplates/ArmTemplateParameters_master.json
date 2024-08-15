@@ -17,6 +17,9 @@
 		"ls_covid24reportdl_properties_typeProperties_url": {
 			"value": "https://covid24reportdl.dfs.core.windows.net/"
 		},
+		"ls_db_covid_cluster_properties_typeProperties_existingClusterId": {
+			"value": "0814-214155-59g6ghq0"
+		},
 		"ls_http_opendata_ecdc_europa_eu_properties_typeProperties_url": {
 			"value": "@{linkedService().sourceBaseURL}"
 		},
