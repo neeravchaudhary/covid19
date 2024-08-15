@@ -171,7 +171,7 @@
 									],
 									"outputs": [
 										{
-											"referenceName": "ds_ecdc_raw_dl",
+											"referenceName": "ds_ecdc_raw_csv_dl",
 											"type": "DatasetReference",
 											"parameters": {
 												"sinkFileName": {
@@ -189,12 +189,15 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "pl_ingest"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_config_file_list')]",
 				"[concat(variables('factoryId'), '/datasets/ds_ecdc_raw_csv_http')]",
-				"[concat(variables('factoryId'), '/datasets/ds_ecdc_raw_dl')]"
+				"[concat(variables('factoryId'), '/datasets/ds_ecdc_raw_csv_dl')]"
 			]
 		},
 		{
@@ -394,6 +397,9 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "pl_ingest"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -446,6 +452,9 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "pl_process"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -481,7 +490,8 @@
 									"DimDateSource": {},
 									"sinkWeeklyData": {},
 									"sinkDailyData": {}
-								}
+								},
+								"linkedServiceParameters": {}
 							},
 							"staging": {},
 							"compute": {
@@ -495,6 +505,9 @@
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "pl_process"
 				},
 				"annotations": []
 			},
@@ -532,6 +545,9 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "pl_process"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -546,6 +562,9 @@
 				"linkedServiceName": {
 					"referenceName": "ls_ablob_covid24reportsa",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "lookup"
 				},
 				"annotations": [],
 				"type": "Json",
@@ -583,6 +602,9 @@
 				"linkedServiceName": {
 					"referenceName": "ls_covid24reportdl",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "lookup"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -626,34 +648,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_daily_count_sink')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_covid24reportdl",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "ecdc/HospitalAdmissionDataDaily",
-						"fileSystem": "processed"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_covid24reportdl')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/ds_dim_date_lookup')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -661,6 +655,9 @@
 				"linkedServiceName": {
 					"referenceName": "ls_covid24reportdl",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "lookup"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -754,6 +751,9 @@
 						"type": "string"
 					}
 				},
+				"folder": {
+					"name": "raw"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -776,7 +776,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_ecdc_raw_dl')]",
+			"name": "[concat(parameters('factoryName'), '/ds_ecdc_raw_csv_dl')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -788,6 +788,9 @@
 					"sinkFileName": {
 						"type": "string"
 					}
+				},
+				"folder": {
+					"name": "raw"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -821,6 +824,9 @@
 					"referenceName": "ls_ablob_covid24reportsa",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "raw"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -851,6 +857,9 @@
 					"referenceName": "ls_covid24reportdl",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "raw"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -880,6 +889,9 @@
 					"referenceName": "ls_covid24reportdl",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "processed"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -907,6 +919,9 @@
 				"linkedServiceName": {
 					"referenceName": "ls_covid24reportdl",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "raw"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -974,6 +989,9 @@
 					"referenceName": "ls_covid24reportdl",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "raw"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -1024,13 +1042,16 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_weekly_count_sink')]",
+			"name": "[concat(parameters('factoryName'), '/ds_processed_hospital_admin_weekly')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "ls_covid24reportdl",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "processed"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -1283,14 +1304,14 @@
 					"sinks": [
 						{
 							"dataset": {
-								"referenceName": "ds_weekly_count_sink",
+								"referenceName": "ds_processed_hospital_admin_weekly",
 								"type": "DatasetReference"
 							},
 							"name": "sinkWeeklyData"
 						},
 						{
 							"dataset": {
-								"referenceName": "ds_daily_count_sink",
+								"referenceName": "ds_processed_hospital_Admission_daily",
 								"type": "DatasetReference"
 							},
 							"name": "sinkDailyData"
@@ -1477,6 +1498,16 @@
 						"     skipDuplicateMapOutputs: true) ~> sinkWeeklyData",
 						"selectRequiredData4 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
+						"     input(",
+						"          country as string,",
+						"          country_code_2_digit as string,",
+						"          country_code_3_digit as string,",
+						"          population as string,",
+						"          reported_date as string,",
+						"          hospital_occupancy_count as string,",
+						"          icu_occupancy_count as string,",
+						"          source as string",
+						"     ),",
 						"     truncate: true,",
 						"     umask: 0022,",
 						"     preCommands: [],",
@@ -1490,8 +1521,8 @@
 				"[concat(variables('factoryId'), '/datasets/ds_raw_hospital_admission_data')]",
 				"[concat(variables('factoryId'), '/datasets/ds_country_lookup')]",
 				"[concat(variables('factoryId'), '/datasets/ds_dim_date_lookup')]",
-				"[concat(variables('factoryId'), '/datasets/ds_weekly_count_sink')]",
-				"[concat(variables('factoryId'), '/datasets/ds_daily_count_sink')]"
+				"[concat(variables('factoryId'), '/datasets/ds_processed_hospital_admin_weekly')]",
+				"[concat(variables('factoryId'), '/datasets/ds_processed_hospital_Admission_daily')]"
 			]
 		},
 		{
@@ -1523,6 +1554,9 @@
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "pl_ingest"
 				},
 				"annotations": []
 			},
@@ -1696,6 +1730,9 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "pl_sqlize"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -1733,6 +1770,9 @@
 				"linkedServiceName": {
 					"referenceName": "ls_covid_sql_db",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "sql"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -1832,7 +1872,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ds_processed_hospital_Admission",
+								"referenceName": "ds_processed_hospital_Admission_daily",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -1849,21 +1889,27 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "pl_sqlize"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_processed_hospital_Admission')]",
+				"[concat(variables('factoryId'), '/datasets/ds_processed_hospital_Admission_daily')]",
 				"[concat(variables('factoryId'), '/datasets/ds_sql_hospital_admission_daily')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ds_processed_hospital_Admission')]",
+			"name": "[concat(parameters('factoryName'), '/ds_processed_hospital_Admission_daily')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "ls_covid24reportdl",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "processed"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -1925,6 +1971,9 @@
 				"linkedServiceName": {
 					"referenceName": "ls_covid_sql_db",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "sql"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -2163,6 +2212,9 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "pl_sqlize"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -2178,6 +2230,9 @@
 				"linkedServiceName": {
 					"referenceName": "ls_covid24reportdl",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "processed"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -2255,6 +2310,9 @@
 				"linkedServiceName": {
 					"referenceName": "ls_covid_sql_db",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "sql"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
