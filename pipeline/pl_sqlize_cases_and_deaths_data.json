@@ -157,6 +157,9 @@
 				]
 			}
 		],
+		"folder": {
+			"name": "pl_sqlize"
+		},
 		"annotations": []
 	}
 }

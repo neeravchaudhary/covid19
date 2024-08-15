@@ -129,6 +129,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "pl_ingest"
+		},
 		"annotations": []
 	}
 }

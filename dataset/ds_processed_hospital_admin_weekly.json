@@ -1,5 +1,5 @@
 {
-	"name": "ds_weekly_count_sink",
+	"name": "ds_processed_hospital_admin_weekly",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_covid24reportdl",

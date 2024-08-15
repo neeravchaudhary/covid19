@@ -29,14 +29,14 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_weekly_count_sink",
+						"referenceName": "ds_processed_hospital_admin_weekly",
 						"type": "DatasetReference"
 					},
 					"name": "sinkWeeklyData"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_daily_count_sink",
+						"referenceName": "ds_processed_hospital_Admission_daily",
 						"type": "DatasetReference"
 					},
 					"name": "sinkDailyData"
@@ -149,7 +149,7 @@
 				"     skipDuplicateMapOutputs: true) ~> selectRequiredData2",
 				"selectRequiredData2 split(indicator=='Weekly new hospital admissions per 100k' || indicator=='Weekly new ICU admissions per 100k',",
 				"     disjoint: false) ~> splitDailyFromWeekly@(Weekly, Daily)",
-				"DimDateSource aggregate(groupBy(ecdc_year_week = year+'-W'+lpad(week_of_year, 2, '0')),",
+				"DimDateSource aggregate(groupBy(ecdc_year_week = year+'-W'+lpad(week_of_year,2,'0')),",
 				"     week_start_date = min(date),",
 				"          week_end_date = max(date)) ~> AggDimDate",
 				"splitDailyFromWeekly@Weekly, AggDimDate join(reported_year_week == ecdc_year_week,",
@@ -223,6 +223,16 @@
 				"     skipDuplicateMapOutputs: true) ~> sinkWeeklyData",
 				"selectRequiredData4 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          country as string,",
+				"          country_code_2_digit as string,",
+				"          country_code_3_digit as string,",
+				"          population as string,",
+				"          reported_date as string,",
+				"          hospital_occupancy_count as string,",
+				"          icu_occupancy_count as string,",
+				"          source as string",
+				"     ),",
 				"     truncate: true,",
 				"     umask: 0022,",
 				"     preCommands: [],",

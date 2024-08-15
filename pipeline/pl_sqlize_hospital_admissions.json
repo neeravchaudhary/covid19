@@ -46,7 +46,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_processed_hospital_Admission",
+						"referenceName": "ds_processed_hospital_Admission_daily",
 						"type": "DatasetReference"
 					}
 				],
