@@ -47,6 +47,10 @@
 			"type": "string",
 			"defaultValue": "adminuser"
 		},
+		"tr_execute_population_pipelines_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/4395c6ad-ba87-4468-b316-d052125262fe/resourceGroups/covid-project-rg/providers/Microsoft.Storage/storageAccounts/covid24reportsa"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -121,6 +125,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"tr_execute_population_pipelines_properties_typeProperties_scope": {
+						"value": "[parameters('tr_execute_population_pipelines_properties_typeProperties_scope')]"
 					}
 				}
 			},

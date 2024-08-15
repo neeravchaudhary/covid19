@@ -46,6 +46,10 @@
 		"ls_covid_sql_db_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "adminuser"
+		},
+		"tr_execute_population_pipelines_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/4395c6ad-ba87-4468-b316-d052125262fe/resourceGroups/covid-project-rg/providers/Microsoft.Storage/storageAccounts/covid24reportsa"
 		}
 	},
 	"variables": {
@@ -2429,6 +2433,36 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/pl_ingest_population_data')]",
 				"[concat(variables('factoryId'), '/pipelines/pl_process_population_data')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tr_execute_population_pipelines')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Execute_Population_Pipelines",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/population/blobs/population_by_age.tsv.gz",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('tr_execute_population_pipelines_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Execute_Population_Pipelines')]"
 			]
 		}
 	]

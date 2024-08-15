@@ -35,6 +35,9 @@
 		"ls_covid_sql_db_properties_typeProperties_userName": {
 			"value": "adminuser"
 		},
+		"tr_execute_population_pipelines_properties_typeProperties_scope": {
+			"value": "/subscriptions/4395c6ad-ba87-4468-b316-d052125262fe/resourceGroups/covid-project-rg/providers/Microsoft.Storage/storageAccounts/covid24reportsa"
+		},
 		"containerUri": {
 			"value": ""
 		},
